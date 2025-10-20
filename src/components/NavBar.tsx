@@ -14,7 +14,7 @@ export default function Navbar() {
 
             {/* Navigation */}
             <nav className="flex w-[560px] h-6 justify-center items-start gap-6">
-              <Link to="/projects" className="text-gray-700 text-base font-medium leading-6 hover:text-blue-600">Browse Projects</Link>
+              <Link to="/projects" className="text-gray-700 text-base font-medium leading-6 hover:text-blue-600">Discover</Link>
               <Link to="/talent" className="text-gray-700 text-base font-medium leading-6 hover:text-blue-600">Find Talent</Link>
               <Link to="/how-it-works" className="text-gray-700 text-base font-medium leading-6 hover:text-blue-600">How it Works</Link>
             </nav>
