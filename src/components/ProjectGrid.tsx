@@ -1,83 +1,123 @@
-import ProjectCards from "./ProjectCard";
+import ActivitySidebar from "./ActivitySidebar";
+import CategoriesSidebar from "./CategoriesSidebar";
+import ProjectCard from "./ProjectCard";
+import { Button } from "./ui/button";
 
 const mockProjects = [
-  {
+   {
     id: 1,
-    title: "AI-Powered Task Manager",
-    description: "Building an intelligent task management system that learns from your habits and suggests optimal scheduling.",
-    techStack: ["React", "TypeScript", "Python", "TensorFlow"],
-    rolesNeeded: ["ML Engineer", "UI/UX Designer"],
-    interestedCount: 12
+    title: "AI-Powered E-commerce Platform",
+    description: "Building a next-generation e-commerce platform with AI recommendations, real-time analytics, and seamless user experience. Looking for passionate developers and designers to join our team.",
+    techStack: ["React", "Python", "Machine Learning"],
+    author: {
+      name: "Sarah Chen",
+      role: "Senior Full-Stack Developer",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+    },
+    members: 3,
+    maxMembers: 5,
+    postedTime: "2 days ago",
+    likes: 24,
+    status: "Open" as const
   },
   {
     id: 2,
-    title: "Decentralized Social Network",
-    description: "Creating a privacy-first social platform using blockchain technology for user data ownership.",
-    techStack: ["Solidity", "React", "IPFS", "Node.js"],
-    rolesNeeded: ["Blockchain Dev", "Frontend Dev"],
-    interestedCount: 28
+    title: "Mental Health Support App",
+    description: "Creating a mobile app to provide accessible mental health resources and peer support. We need mobile developers, therapists, and marketing specialists to make this vision a reality.",
+    techStack: ["Flutter", "Firebase", "UI/UX"],
+    author: {
+      name: "Alex Rodriguez",
+      role: "Product Designer & Entrepreneur",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+    },
+    members: 2,
+    maxMembers: 6,
+    postedTime: "1 week ago",
+    likes: 18,
+    status: "Recruiting" as const
   },
   {
     id: 3,
-    title: "Health & Fitness Tracker",
-    description: "Comprehensive wellness app with nutrition tracking, workout planning, and progress analytics.",
-    techStack: ["Flutter", "Firebase", "Swift"],
-    rolesNeeded: ["Mobile Dev", "Backend Dev"],
-    interestedCount: 15
+    title: "Decentralized Learning Platform",
+    description: "Building a blockchain-based platform for peer-to-peer learning with NFT certificates. Looking for Web3 developers, educators, and community managers.",
+    techStack: ["Solidity", "Web3", "Next.js"],
+    author: {
+      name: "Michael Thompson",
+      role: "Blockchain Developer",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael"
+    },
+    members: 1,
+    maxMembers: 4,
+    postedTime: "3 days ago",
+    likes: 32,
+    status: "Open" as const
   },
   {
     id: 4,
-    title: "Virtual Reality Art Gallery",
-    description: "Immersive VR platform for artists to showcase and sell their digital artwork in virtual spaces.",
-    techStack: ["Unity", "C#", "WebGL", "Three.js"],
-    rolesNeeded: ["VR Developer", "3D Artist"],
-    interestedCount: 9
-  },
-  {
-    id: 5,
     title: "Sustainable Living Marketplace",
-    description: "E-commerce platform connecting eco-friendly brands with conscious consumers.",
-    techStack: ["Next.js", "PostgreSQL", "Stripe", "Tailwind"],
-    rolesNeeded: ["Full Stack Dev", "Product Manager"],
-    interestedCount: 22
-  },
-  {
-    id: 6,
-    title: "Real-time Collaboration Tool",
-    description: "Next-gen collaborative workspace with live editing, video calls, and AI assistance.",
-    techStack: ["Vue.js", "WebRTC", "Redis", "Docker"],
-    rolesNeeded: ["Frontend Dev", "DevOps Engineer"],
-    interestedCount: 31
+    description: "E-commerce platform connecting eco-friendly brands with conscious consumers. Need full-stack developers and sustainability experts.",
+    techStack: ["Next.js", "PostgreSQL", "Stripe"],
+    author: {
+      name: "Emma Green",
+      role: "Environmental Advocate",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma"
+    },
+    members: 4,
+    maxMembers: 6,
+    postedTime: "5 days ago",
+    likes: 15,
+    status: "Recruiting" as const
   }
 ];
 
 const ProjectGrid = () => {
   return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Discover Projects
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover exciting projects looking for talented collaborators. Find your next opportunity to build something amazing.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockProjects.map((project) => (
-            <ProjectCards
-              key={project.id}
-              title={project.title}
-              description={project.description}
-              techStack={project.techStack}
-              rolesNeeded={project.rolesNeeded}
-              interestedCount={project.interestedCount}
-            />
-          ))}
+    
+<div className="container mx-auto px-10 py-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left Sidebar - Categories */}
+          <div className="lg:col-span-3">
+            <CategoriesSidebar />
+          </div>
+
+          {/* Main Content - Projects */}
+          <div className="lg:col-span-6">
+            <div className="space-y-6">
+              <div>
+                <h1 className="text-3xl font-bold text-foreground mb-4">
+                  Discover Projects
+                </h1>
+                
+                {/* Filter Tabs */}
+                <div className="flex gap-2 mb-6">
+                  {(["Latest", "Popular", "My Interests"] as const).map((filter) => (
+                    <Button
+                      key={filter}
+                  
+                      size="sm"
+                    >
+                      {filter}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Project Cards */}
+              <div className="space-y-4">
+                {mockProjects.map((project) => (
+                  <ProjectCard key={project.id} {...project} />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Sidebar - Activity */}
+          <div className="lg:col-span-3">
+            <ActivitySidebar />
+          </div>
         </div>
       </div>
-    </section>
   );
 };
 
